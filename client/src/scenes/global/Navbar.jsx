@@ -1,6 +1,6 @@
 import { useState }  from 'react';
 import { ProSidebarProvider, Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Box, IconButton, Typography, useTheme } from '@mui/material';
 import { tokens } from '../../theme';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
@@ -35,7 +35,7 @@ const Navbar = () => {
     const [selected, setSelected] = useState("Dashboard");
 
     return (
-        <ProSidebarProvider >
+        <ProSidebarProvider>
             <Box
                 sx={{ 
                     "& .pro-sidebar-inner": {
@@ -55,9 +55,9 @@ const Navbar = () => {
                     },
                 }}
             >
-                    
+                <div style={{ display: 'flex', height: '100%' }}>   
                     <Sidebar collapsed={isCollapsed}>
-                        <Menu iconShape="square">
+                        <Menu iconshape="square">
                             <MenuItem
                                 onClick={() => setIsCollapsed(!isCollapsed)}
                                 icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -73,18 +73,13 @@ const Navbar = () => {
                                         alignItems="center"
                                         ml="15px"
                                     >
-                                        <IconButton onClickk={() => setIsCollapsed(!isCollapsed)}>
+                                        <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                                             <MenuOutlinedIcon />
                                         </IconButton>
                                     </Box>
                                 )}
                             </MenuItem>
                         </Menu>
-                    </Sidebar>
-
-
-                <Box>
-                    <Sidebar>
                         <Menu>
                             {/* LOGO */}
                             {!isCollapsed && (
@@ -156,9 +151,7 @@ const Navbar = () => {
                             </Box>
                         </Menu>
                     </Sidebar>
-                </Box>
-
-
+                </div>
             </Box>
         </ProSidebarProvider>
     );
