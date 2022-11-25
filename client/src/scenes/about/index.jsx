@@ -9,7 +9,7 @@ const About = () => {
     return <Box m="20px">
         <Header title="ABOUT" subtitle="About This Project" >
             <Typography>
-                "Hello"
+                ABCDEFGHIJKLMNOPQRSTUVWXYZ
             </Typography>
         </Header>
     </Box>
