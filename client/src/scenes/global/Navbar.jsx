@@ -93,7 +93,6 @@ const Navbar = () => {
                                             style={{ cursor: "pointer", borderRadius: "50%" }}
                                         />
                                     </Box>
-
                                     <Box textAlign= "center">
                                         <Typography 
                                             variant="h3" 
@@ -116,7 +115,6 @@ const Navbar = () => {
                                     selected={selected}
                                     setSelected={setSelected}
                                 />
-
                                 <Item 
                                     title="Fire Simulation"
                                     to="/simulation"
@@ -124,7 +122,6 @@ const Navbar = () => {
                                     selected={selected}
                                     setSelected={setSelected}
                                 />
-
                                 <Typography
                                     variant="h6"
                                     color={colors.grey[300]}
@@ -132,7 +129,6 @@ const Navbar = () => {
                                 >
                                     Data
                                 </Typography>
-
                                 <Typography
                                     variant="h6"
                                     color={colors.grey[300]}
@@ -140,7 +136,6 @@ const Navbar = () => {
                                 >
                                     Reports
                                 </Typography>
-                                
                                 <Item 
                                     title="About"
                                     to="/about"
