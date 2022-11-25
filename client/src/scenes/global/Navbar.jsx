@@ -35,7 +35,7 @@ const Navbar = () => {
     const [selected, setSelected] = useState("Dashboard");
 
     return (
-        <ProSidebarProvider>
+        <ProSidebarProvider >
             <Box
                 sx={{ 
                     "& .pro-sidebar-inner": {
