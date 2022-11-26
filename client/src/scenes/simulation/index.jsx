@@ -1,49 +1,54 @@
+import React from "react";
 import { Typography, Box, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
 import { Unity, useUnityContext } from "react-unity-webgl";
+import Header from "../../components/Header";
 
 const Game = () => {
-    {/* const theme = useTheme(); */}
-    {/* const colors = tokens(theme.palette.mode); */}
-
-    const unityContextLocation = "../../assets/simulationUnity/Build"
 
     const { unityProvider, isLoaded, loadingProgression } = useUnityContext({
-        loaderUrl: "${unityContextLocation}/simulationUnity.loader.js",
-        dataUrl: "${unityContextLocation}/simulationUnity.data",
-        frameworkUrl: "${unityContextLocation}/simulationUnity.framework.js",
-        codeUrl: "${unityContextLocation}/simulationUnity.wasm",
+        loaderUrl: "../../assets/simulationUnity/build/simulationUnity.loader.js", 
+        dataUrl: "../../assets/simulationUnity/build/simulationUnity.data",
+        frameworkUrl: "../../assets/simulationUnity/build/simulationUnity.framework.js",
+        codeUrl: "../../assets/simulationUnity/build/simulationUnity.wasm",
     });
 
     const loadingPercentage = Math.round(loadingProgression * 100);
 
-    return <Box
+    return <Box m="20px">
+        <Header title="BDI SIMULATION" subtitle="Unity WebGL" />
+        <Box 
             display="flex"
             justifyContent="space-between"
             alignItems="center"
         >
-            <Header title="FIRE SIMULATION" />
-            {isLoaded === false && (
-                // We'll conditionally render the loading overlay if the Unity
-                // Application is not loaded.
-                <Box 
-                    position= "absolute"
-                    top= "0"
-                    left= "0"
-                    width= "100%"
-                    height= "100%"
-                    background= "grey"
-                    /* We'll set the following Flex properties in order to center the text. */
-                    display= "flex"
-                    justify-content= "center"
-                    align-items= "center"
+            
+            <Box 
+                position="relative"
+                width="800px"
+                height="600px"
                 >
-                    <p>Loading... ({loadingPercentage}%)</p>
-                </Box>
-            )}
-
-            <Unity className="unity" unityProvider={unityProvider} />
+                    {isLoaded === false && (
+                        <Box 
+                            position="absolute"
+                            top="0"
+                            left="0"
+                            width="100%"
+                            height="100%"
+                            background="grey"
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                        >
+                            <Typography variant="h6" gutterBottom>Loading ... ({loadingPercentage}%)</Typography>
+                        </Box>
+                    )}
+                    <Unity 
+                        unityProvider={unityProvider} 
+                        style={{ width:900, height:800 }}
+                    />     
+            </Box>
         </Box>
+    </Box>
 }
 
 export default Game;

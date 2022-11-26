@@ -4,7 +4,7 @@ import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import Topbar from './scenes/global/Topbar';
 import Navbar from './scenes/global/Navbar';
-import Dashboard from './scenes/about'; //NAVBAR ONLY WORKING FOR THIS BUT NOT FOR OTHER
+import Dashboard from './scenes/simulation'; //NAVBAR ONLY WORKING FOR THIS BUT NOT FOR OTHER
 import Simulation from './scenes/simulation'; 
 /*Data & Reports*/
 import About from './scenes/about';
