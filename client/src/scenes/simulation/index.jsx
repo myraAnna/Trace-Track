@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Typography, Box, useTheme } from "@mui/material";
-import { Unity, useUnityContext } from "react-unity-webgl";
+import { Unity, useUnityContext } from "react-unity-webgl"; //current version
 import Header from "../../components/Header";
 
 const Game = () => {
@@ -11,6 +11,34 @@ const Game = () => {
         frameworkUrl: "../../assets/simulationUnity/build/simulationUnity.framework.js",
         codeUrl: "../../assets/simulationUnity/build/simulationUnity.wasm",
     });
+
+    //store the device pixel ratio
+    const [devicePixelRatio, setDevicePixelRatio] = useState(
+        window.devicePixelRatio
+    );
+
+    const handleChangePixelRatio = useCallback(
+        function () {
+            //update the device pixel ratio of the Unity
+            //application to match the device pixel ratio of the browser
+            const updateDevicePixelRatio = function () {
+                setDevicePixelRatio(window.devicePixelRatio);
+            };
+            //a media matcher which watches for changes in the device pixel ratio
+            const mediaMatcher = window.matchMedia(
+                'screen and (resolution: ${devicePixelRatio}dppx)'
+            );
+            //adding an event listener to the media matcher which will update the
+            //device pixel ratio of the Unity App when the device pixel
+            //ratio changes
+            mediaMatcher.addEventListener("change", updateDevicePixelRatio);
+            return function () {
+                //removing the event lustener when the components unmounts
+                mediaMatcher.removeEventListener("change", updateDevicePixelRatio);
+            };
+        },
+        [devicePixelRatio]
+    )
 
     const loadingPercentage = Math.round(loadingProgression * 100);
 
@@ -45,6 +73,7 @@ const Game = () => {
                     <Unity 
                         unityProvider={unityProvider} 
                         style={{ width:900, height:800 }}
+                        devicePixelRatio={devicePixelRatio}
                     />     
             </Box>
         </Box>
