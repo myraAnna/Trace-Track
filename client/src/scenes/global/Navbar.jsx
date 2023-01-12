@@ -1,8 +1,9 @@
 import { useState }  from 'react';
-import { ProSidebarProvider, Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
+import { ProSidebarProvider, Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { Box, IconButton, Typography, useTheme } from '@mui/material';
 import { tokens } from '../../theme';
+import navBarData from '../../data/navBarData';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import FireplaceOutlinedIcon from '@mui/icons-material/FireplaceOutlined';
@@ -11,6 +12,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
     return (
         <MenuItem 
             active={ selected === title } 
@@ -19,11 +21,15 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
             }}
             onClick={() => setSelected(title)}
             icon={icon}
-            >
+        >
             <Typography>
-                {title}
+                {navBarData.map(link => (
+                    <Link key={link.to} to={link.to}>
+                        {link.icon}
+                        
+                    </Link>
+                ))}
             </Typography>
-            <Link to={to} />
         </MenuItem>
     );
 };
@@ -79,8 +85,7 @@ const Navbar = () => {
                                     </Box>
                                 )}
                             </MenuItem>
-                        </Menu>
-                        <Menu>
+                        
                             {/* LOGO */}
                             {!isCollapsed && (
                                 <Box mb="25px">
@@ -115,6 +120,7 @@ const Navbar = () => {
                                     selected={selected}
                                     setSelected={setSelected}
                                 />
+
                                 <Item 
                                     title="Fire Simulation"
                                     to="/simulation"
@@ -122,6 +128,7 @@ const Navbar = () => {
                                     selected={selected}
                                     setSelected={setSelected}
                                 />
+
                                 <Typography
                                     variant="h6"
                                     color={colors.grey[300]}
@@ -129,6 +136,7 @@ const Navbar = () => {
                                 >
                                     Data
                                 </Typography>
+                                
                                 <Typography
                                     variant="h6"
                                     color={colors.grey[300]}
@@ -136,13 +144,14 @@ const Navbar = () => {
                                 >
                                     Reports
                                 </Typography>
+
                                 <Item 
                                     title="About"
                                     to="/about"
                                     icon={<InfoOutlinedIcon />}
                                     selected={selected}
                                     setSelected={setSelected}
-                                />
+                                /> 
                             </Box>
                         </Menu>
                     </Sidebar>

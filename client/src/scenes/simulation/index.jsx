@@ -53,7 +53,7 @@ const Game = () => {
             <Box 
                 position="relative"
                 width="800px"
-                height="600px"
+                height="400px"
                 >
                     {isLoaded === false && (
                         <Box 
@@ -72,7 +72,7 @@ const Game = () => {
                     )}
                     <Unity 
                         unityProvider={unityProvider} 
-                        style={{ width:900, height:800 }}
+                        style={{ width:800, height:500 }}
                         devicePixelRatio={devicePixelRatio}
                     />     
             </Box>
